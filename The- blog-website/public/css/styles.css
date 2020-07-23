@@ -8,6 +8,7 @@ html {
     padding-bottom: 70px;
 }
 .navbar {
+  background-color: #f4f6ff !important;
     padding-top: 15px;
     padding-bottom: 15px;
     border: 0;
