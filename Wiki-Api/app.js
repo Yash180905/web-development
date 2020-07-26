@@ -20,10 +20,13 @@ const articleSchema = {
 };
 
 const Article = mongoose.model("article", articleSchema);
+app.route("/article")
 
-app.get("/article", function (req, res) {
+//! Requests Targetting All article
 
-    Article.find({}, function (err, foundArticle) {
+.get( function (req, res) {
+
+     Article.find({}, function (err, foundArticle) {
         if (!err) {
             res.send(foundArticle);
         } else {
@@ -32,8 +35,8 @@ app.get("/article", function (req, res) {
 
     });
 
-});
-app.post("/article", function (req, res) {
+})
+.post( function (req, res) {
     const recivedTitle = req.body.title;
     const recivedContent = req.body.content;
     const newArticle = new Article({
@@ -47,8 +50,9 @@ app.post("/article", function (req, res) {
             console.log(err);
         }
     });
-});
-app.delete("/article", function (req, res) {
+})
+.delete(function (req, res) {
+
     Article.deleteMany({}, function (err) {
 
         if (!err) {
@@ -57,7 +61,24 @@ app.delete("/article", function (req, res) {
             res.send(err);
         }
     })
-})
+});
+
+//! Requests Targetting A specific article //
+
+app.route("/article/:articleTitle")
+
+.get(function (req , res) {
+
+Article.findOne({title: req.params.articleTitle}, function(err, foundArticle) {
+  if(foundArticle){
+      res.send(foundArticle);
+  }else{
+      res.send("itm not found");
+  }
+});    
+});
+
+
 app.listen(3000, function () {
     console.log("Server started on port 3000");
 });
