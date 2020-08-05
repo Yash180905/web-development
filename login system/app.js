@@ -307,8 +307,6 @@ app.get("/submit", function(req, res){
   } else {
     res.redirect("/login");
   }
-});
-
 app.post("/submit", function(req, res){
   const submittedSecret = req.body.secret;
 
